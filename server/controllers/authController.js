@@ -40,7 +40,7 @@ const payload = { user: { id: newUser.id } };
         res.json({ token });
  
     } catch (err) {
-        console.error(err.message);
+        console.error(err);
         res.status(500).send('Server error');
     }
 };
@@ -65,7 +65,7 @@ const validPassword = await bcrypt.compare(password, user.rows[0].password_hash)
         res.json({ token });
  
     } catch (err) {
-        console.error(err.message);
+        console.error(err);
         res.status(500).send('Server error');
     }
 };

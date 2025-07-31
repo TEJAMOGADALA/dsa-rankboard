@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
  
 const RegisterPage = () => {
+    const navigate = useNavigate(); // Initialize the hook
     const [formData, setFormData] = useState({
         email: '',
         username: '',
@@ -20,6 +22,10 @@ const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value
                 body: JSON.stringify({ email, username, password }),
             });
             const data = await res.json();
+            if (data.token) {
+                localStorage.setItem('token', data.token); // Save the token
+                navigate('/dashboard'); // Redirect to dashboard
+            }
             console.log(data); // You'll get a token here
             // Later, we'll save the token and redirect
         } catch (err) {
