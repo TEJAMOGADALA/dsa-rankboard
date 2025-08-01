@@ -2,6 +2,40 @@ const router = require('express').Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { register, login } = require('../controllers/authController');
+
+
+/**
+* @swagger
+* /auth/register:
+* post:
+* summary: Register a new user
+* tags: [Auth]
+* requestBody:
+* required: true
+* content:
+* application/json:
+* schema:
+* type: object
+* required:
+* - email
+* - username
+* - password
+* properties:
+* email:
+* type: string
+* default: user@example.com
+* username:
+* type: string
+* default: testuser
+* password:
+* type: string
+* default: password123
+* responses:
+* 200:
+* description: User registered successfully. Returns a JWT token.
+* 401:
+* description: User already exists.
+*/
  
 // Defines the endpoint and maps it to the register function
 router.post('/register', register);
